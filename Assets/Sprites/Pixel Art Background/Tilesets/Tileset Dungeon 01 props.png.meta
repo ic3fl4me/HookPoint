@@ -397,7 +397,18 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Tileset Dungeon 01 props_0: 4097148688628136484
+      Tileset Dungeon 01 props_1: 7665889011256144490
+      Tileset Dungeon 01 props_10: 5835180731377024098
+      Tileset Dungeon 01 props_2: 6722535127687258253
+      Tileset Dungeon 01 props_3: 1010274095559385338
+      Tileset Dungeon 01 props_4: -365351038891232403
+      Tileset Dungeon 01 props_5: -8737253694345433051
+      Tileset Dungeon 01 props_6: 8337505176909526239
+      Tileset Dungeon 01 props_7: 5181999939743130350
+      Tileset Dungeon 01 props_8: -1078393203048929339
+      Tileset Dungeon 01 props_9: -5069870146634014308
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

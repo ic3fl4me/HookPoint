@@ -622,7 +622,27 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Tileset Morning props_0: -3314109413057076152
+      Tileset Morning props_1: -300381629911819069
+      Tileset Morning props_10: -8284503553107462174
+      Tileset Morning props_11: -593026054891687039
+      Tileset Morning props_12: 7307098575594030680
+      Tileset Morning props_13: 4336331031006086589
+      Tileset Morning props_14: -2937713883596722520
+      Tileset Morning props_15: 3855014484165916151
+      Tileset Morning props_16: 2270040028409711576
+      Tileset Morning props_17: 7202184886521061366
+      Tileset Morning props_18: -7556598992914540624
+      Tileset Morning props_19: -2646536455575389393
+      Tileset Morning props_2: -7409365038299048682
+      Tileset Morning props_3: -4647579199888092053
+      Tileset Morning props_4: 8899924579605429904
+      Tileset Morning props_5: 1423559440233260879
+      Tileset Morning props_6: -5365307037747654713
+      Tileset Morning props_7: -4637805153747672922
+      Tileset Morning props_8: 6757142483283993397
+      Tileset Morning props_9: 8177789942225768715
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

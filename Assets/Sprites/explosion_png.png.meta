@@ -127,10 +127,10 @@ TextureImporter:
         serializedVersion: 2
         x: 16
         y: 18
-        width: 63
+        width: 65
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -143,77 +143,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: explosion_png_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 41
-        width: 9
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 463eac200326c5720800000000000000
-      internalID: 2836249823681373028
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: explosion_png_2
-      rect:
-        serializedVersion: 2
-        x: 17
-        y: 52
-        width: 65
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b34e6c11ccba415c0800000000000000
-      internalID: -4245579655743609797
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: explosion_png_3
-      rect:
-        serializedVersion: 2
-        x: 73
-        y: 37
-        width: 8
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a520e1ee771157c30800000000000000
-      internalID: 4356407421344547418
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 9ccfd456c2c85fa4b8bf98d608a98988
     internalID: 0
     vertices: []
     indices: 
@@ -222,7 +156,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      explosion_png_0: -229579725483144053
+      explosion_png_1: 2836249823681373028
+      explosion_png_2: -4245579655743609797
+      explosion_png_3: 4356407421344547418
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

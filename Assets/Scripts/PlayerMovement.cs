@@ -24,17 +24,26 @@ public class PlayerMovement : MonoBehaviour
     {
         HandlePlayerRotation();
 
+        HandlePlayerMovement();
+
+        HandlePlayerJump();
+    }
+
+    private void HandlePlayerMovement()
+    {
         float horizontalInput = Input.GetAxis("Horizontal");
 
-        // Movement
         if (horizontalInput != 0)
             body.linearVelocity = new Vector2(horizontalInput * movementSpeed, body.linearVelocity.y);
         else
             body.linearVelocity = new Vector2(0, body.linearVelocity.y);
-        
-        // Jump
-        if (Input.GetKeyDown(KeyCode.Space) && (isGrounded || doubleJumpAvailable)){
-            body.linearVelocity = new Vector2(body.linearVelocity.x, movementSpeed*0.75f);
+    }
+
+    private void HandlePlayerJump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && (isGrounded || doubleJumpAvailable))
+        {
+            body.linearVelocity = new Vector2(body.linearVelocity.x, movementSpeed * 0.75f);
             if (!isGrounded)
                 doubleJumpAvailable = false;
         }
@@ -64,12 +73,10 @@ public class PlayerMovement : MonoBehaviour
 
         if (direction.x > 0)
         {
-            // transform.localScale = new Vector3(2, 2, 1);
             sprite.flipX = false;
         }
         else if (direction.x < 0) 
         {
-            // transform.localScale = new Vector3(-2, 2, 1);
             sprite.flipX = true;
         }
     }

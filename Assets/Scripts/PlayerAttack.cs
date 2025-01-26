@@ -10,7 +10,6 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float attackCooldown = 1;
     private Vector2 worldPosition;
     private Vector2 direction;
-    private PlayerMovement playerMovement;
     private GameObject bulletInstance;
     private float cooldownTimer = Mathf.Infinity;
 
@@ -26,9 +25,8 @@ public class PlayerAttack : MonoBehaviour
     {
         HandleGunRotation();
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) && cooldownTimer > attackCooldown)
+        if (gameObject.activeSelf && Input.GetKeyDown(KeyCode.Mouse0) && cooldownTimer > attackCooldown)
             Attack();
-
         cooldownTimer += Time.deltaTime;
     }
 

@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Tileset Sunset background_0: -8097535525457052470
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -622,7 +622,27 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Tileset Nightfall props_0: 7827131185908011675
+      Tileset Nightfall props_1: -7211760674888746964
+      Tileset Nightfall props_10: 7838378905754811256
+      Tileset Nightfall props_11: 4901352465976290528
+      Tileset Nightfall props_12: -3768765462438240808
+      Tileset Nightfall props_13: 3224569093687124511
+      Tileset Nightfall props_14: -9149672539881668158
+      Tileset Nightfall props_15: -6350362985109284834
+      Tileset Nightfall props_16: 7809212116933569792
+      Tileset Nightfall props_17: -1333835710192079063
+      Tileset Nightfall props_18: -3542137748660776009
+      Tileset Nightfall props_19: -319025226822029375
+      Tileset Nightfall props_2: -7185624814527051791
+      Tileset Nightfall props_3: -6593429356744819806
+      Tileset Nightfall props_4: 2285941297377241773
+      Tileset Nightfall props_5: 8085408793521229015
+      Tileset Nightfall props_6: 8354106526073370032
+      Tileset Nightfall props_7: -8853790053512381649
+      Tileset Nightfall props_8: 5918070420163930168
+      Tileset Nightfall props_9: -6041527131349340261
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

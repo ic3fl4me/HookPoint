@@ -622,7 +622,27 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Tileset Night props_0: 8865208071328644150
+      Tileset Night props_1: -2884088854238221452
+      Tileset Night props_10: -7520307213661219251
+      Tileset Night props_11: -4470650329949750457
+      Tileset Night props_12: -7704634130015644526
+      Tileset Night props_13: -7281994653886817024
+      Tileset Night props_14: -1128965241843871421
+      Tileset Night props_15: 2822115588055866353
+      Tileset Night props_16: 8570959870486981569
+      Tileset Night props_17: 5619203426114985001
+      Tileset Night props_18: -3420341472099727815
+      Tileset Night props_19: 2715305541408438865
+      Tileset Night props_2: -2437623127656475775
+      Tileset Night props_3: -3259792383026506382
+      Tileset Night props_4: -4766456162409085961
+      Tileset Night props_5: -1117007011341267611
+      Tileset Night props_6: 2385676346182106987
+      Tileset Night props_7: 1408451472119907626
+      Tileset Night props_8: 3355033451566786718
+      Tileset Night props_9: -2480829163794203289
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

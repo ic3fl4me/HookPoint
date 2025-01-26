@@ -622,7 +622,27 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Tileset Sunset props_0: -1521591674998408676
+      Tileset Sunset props_1: -4421630644549000803
+      Tileset Sunset props_10: -4176312142307153177
+      Tileset Sunset props_11: 2724571847941582642
+      Tileset Sunset props_12: 1765156858338378865
+      Tileset Sunset props_13: -8614336596483357494
+      Tileset Sunset props_14: 639249077361142901
+      Tileset Sunset props_15: -3399471513854674622
+      Tileset Sunset props_16: -6240257779986808581
+      Tileset Sunset props_17: -794107002233706054
+      Tileset Sunset props_18: -6020784612908945068
+      Tileset Sunset props_19: 5897149586516395161
+      Tileset Sunset props_2: -3652789586545489839
+      Tileset Sunset props_3: -8340740214343272982
+      Tileset Sunset props_4: -5017777460332210114
+      Tileset Sunset props_5: -3886494474347473165
+      Tileset Sunset props_6: 803021350648725087
+      Tileset Sunset props_7: -7031778863553710421
+      Tileset Sunset props_8: -8544242733087444717
+      Tileset Sunset props_9: 5716344439085446322
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

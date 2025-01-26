@@ -622,7 +622,27 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Tileset Dawn props_0: -1536486762511535990
+      Tileset Dawn props_1: -672526739665530648
+      Tileset Dawn props_10: -6118442285627436389
+      Tileset Dawn props_11: -8893560835142890600
+      Tileset Dawn props_12: 4801920656248237709
+      Tileset Dawn props_13: 1821354698538383508
+      Tileset Dawn props_14: -4642573347371365620
+      Tileset Dawn props_15: 644115624361552382
+      Tileset Dawn props_16: -2649738849051551089
+      Tileset Dawn props_17: 4434787613018387519
+      Tileset Dawn props_18: -8091328388051561630
+      Tileset Dawn props_19: 4265900792766329333
+      Tileset Dawn props_2: 7016489853517283458
+      Tileset Dawn props_3: -545576090800560807
+      Tileset Dawn props_4: -772097910046392595
+      Tileset Dawn props_5: -1238737607456712479
+      Tileset Dawn props_6: -2729199973270407366
+      Tileset Dawn props_7: 3772762131514009247
+      Tileset Dawn props_8: -7174878238956987361
+      Tileset Dawn props_9: 15404583086796627
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

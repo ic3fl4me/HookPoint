@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Tileset Nightfall background_0: -2291425586594894821
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

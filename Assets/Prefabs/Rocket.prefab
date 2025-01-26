@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3021883307705534236}
   - component: {fileID: -4981843073941832234}
   m_Layer: 7
-  m_Name: Bullet
+  m_Name: Rocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.845, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -79,12 +79,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 2208703988740019828, guid: 99d59885d4f00374b99d46782b1c012d, type: 3}
+  m_Sprite: {fileID: 3306436630412120605, guid: 5fec6136b4549854a9dacd8fbc7366bd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.66, y: 0.38}
+  m_Size: {x: 0.5, y: 0.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -128,8 +128,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.66, y: 0.38}
-    newSize: {x: 0.66, y: 0.38}
+    oldSize: {x: 0.67, y: 0.25}
+    newSize: {x: 0.5, y: 0.25}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -148,6 +148,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d00509a15dd81d4fbe985d00482fb1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletSpeed: 25
+  destroyTime: 3
+  bulletCollisionObjects:
+    serializedVersion: 2
+    m_Bits: 448
+  explosion: {fileID: 3584562390507137138, guid: f01e4b9e9fa6af14da25f5c83e34763b, type: 3}
 --- !u!50 &-4981843073941832234
 Rigidbody2D:
   serializedVersion: 5
@@ -174,4 +180,4 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
