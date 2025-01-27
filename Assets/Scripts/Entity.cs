@@ -3,14 +3,17 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour, IDamageable
 {
-    [SerializeField] private float health = 1;
-    [SerializeField] private Rigidbody2D body;
-    [SerializeField] private Animator animator;
+    [SerializeField] private float maxHealth = 1;
+    [SerializeField] private float currentHealth;
+    [SerializeField] protected Rigidbody2D body;
+    [SerializeField] protected Animator animator;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
     {
         body = GetComponent<Rigidbody2D>();
+
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -21,9 +24,9 @@ public class Entity : MonoBehaviour, IDamageable
 
     public void Damage(float damageAmount)
     {
-        health -= damageAmount;
+        currentHealth -= damageAmount;
 
-        if (health <= 0)
+        if (currentHealth <= 0)
         {
             Die();
         }
