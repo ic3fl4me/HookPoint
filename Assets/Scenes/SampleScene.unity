@@ -1790,7 +1790,7 @@ MonoBehaviour:
   grappleLayer:
     serializedVersion: 2
     m_Bits: 64
-  grappleChain: {fileID: 855928915}
+  grappleRope: {fileID: 855928915}
 --- !u!232 &1038669367
 DistanceJoint2D:
   m_ObjectHideFlags: 0
