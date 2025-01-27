@@ -32,7 +32,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void HandleGunRotation()
     {
-        worldPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         direction = (worldPosition - (Vector2)gun.transform.position).normalized;
         gun.transform.right = direction;
         bulletSpawnPoint.transform.right = direction;

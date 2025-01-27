@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IDamageable
 {
-    [SerializeField] float playerHealth = 1;
-    [SerializeField] Animator animator;
-    [SerializeField] Camera cam;
+    [SerializeField] private float playerHealth = 1;
+    [SerializeField] private Animator animator;
+    [SerializeField] private Camera cam;
     private Rigidbody2D body;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -18,7 +18,7 @@ public class Player : MonoBehaviour, IDamageable
     // Update is called once per frame
     void Update()
     {
-        cam.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
+        cam.transform.position = new Vector3(transform.position.x, transform.position.y + 1, -10);
     }
     public void Damage(float damageAmount)
     {
