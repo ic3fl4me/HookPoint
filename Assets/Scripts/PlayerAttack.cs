@@ -8,8 +8,9 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private GameObject bullet;
     [SerializeField] private Transform bulletSpawnPoint;
     [SerializeField] private float attackCooldown = 1;
-    private Vector2 worldPosition;
-    private Vector2 direction;
+
+    private Vector2 mousePosition;
+    private Vector2 normalizedDirection;
     private GameObject bulletInstance;
     private float cooldownTimer = Mathf.Infinity;
 
@@ -25,17 +26,17 @@ public class PlayerAttack : MonoBehaviour
     {
         HandleGunRotation();
 
-        if (gameObject.activeSelf && Input.GetKeyDown(KeyCode.Mouse0) && cooldownTimer > attackCooldown)
+        if (gameObject.activeSelf && Input.GetMouseButtonDown(0) && cooldownTimer > attackCooldown)
             Attack();
         cooldownTimer += Time.deltaTime;
     }
 
     private void HandleGunRotation()
     {
-        worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        direction = (worldPosition - (Vector2)gun.transform.position).normalized;
-        gun.transform.right = direction;
-        bulletSpawnPoint.transform.right = direction;
+        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        normalizedDirection = (mousePosition - (Vector2)gun.transform.position).normalized;
+        gun.transform.right = normalizedDirection;
+        bulletSpawnPoint.transform.right = normalizedDirection;
     }
 
     private void Attack()

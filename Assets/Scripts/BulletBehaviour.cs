@@ -7,6 +7,7 @@ public class BulletBehaviour : MonoBehaviour
     [SerializeField] private float destroyTime = 5f;
     [SerializeField] private LayerMask bulletCollisionObjects;
     [SerializeField] private GameObject explosion;
+
     private Rigidbody2D body;
     private GameObject explosionInstance;
 

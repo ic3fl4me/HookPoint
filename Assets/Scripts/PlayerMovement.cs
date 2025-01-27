@@ -5,12 +5,13 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float movementSpeed = 7;
+
     private SpriteRenderer sprite;
     private Rigidbody2D body;
     private bool doubleJumpAvailable = true;
     private bool isGrounded = false;
-    private Vector2 worldPosition;
-    private Vector2 direction;
+    private Vector2 mousePosition;
+    private Vector2 normalizedDirection;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -68,14 +69,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandlePlayerRotation()
     {
-        worldPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        direction = (worldPosition - (Vector2)body.transform.position).normalized;
+        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        normalizedDirection = (mousePosition - (Vector2)body.transform.position).normalized;
 
-        if (direction.x > 0)
+        if (normalizedDirection.x > 0)
         {
             sprite.flipX = false;
         }
-        else if (direction.x < 0) 
+        else if (normalizedDirection.x < 0) 
         {
             sprite.flipX = true;
         }
