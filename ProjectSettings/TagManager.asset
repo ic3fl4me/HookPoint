@@ -39,8 +39,29 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Bazooka
+    uniqueID: 2036247629
+    locked: 0
+  - name: 1
+    uniqueID: 3069198975
+    locked: 0
+  - name: 2
+    uniqueID: 2767566777
+    locked: 0
+  - name: 3
+    uniqueID: 1342553981
+    locked: 0
+  - name: 4
+    uniqueID: 2333896243
+    locked: 0
+  - name: 6
+    uniqueID: 3953327193
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: 5
+    uniqueID: 1051761289
     locked: 0
   m_RenderingLayers:
   - Default
