@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Entity : MonoBehaviour, IDamageable
@@ -7,13 +8,13 @@ public class Entity : MonoBehaviour, IDamageable
     [SerializeField] private float currentHealth;
     [SerializeField] protected Rigidbody2D body;
     [SerializeField] protected Animator animator;
-    [SerializeField] protected SpriteRenderer renderer;
+    [SerializeField] protected SpriteRenderer sprite;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
     {
         body = GetComponent<Rigidbody2D>();
-        renderer = GetComponent<SpriteRenderer>();
+        sprite = GetComponent<SpriteRenderer>();
 
         currentHealth = maxHealth;
     }
@@ -30,14 +31,23 @@ public class Entity : MonoBehaviour, IDamageable
 
         if (currentHealth <= 0)
         {
-            Die();
+            StartCoroutine("Die");
         }
     }
 
-    private void Die()
+    private IEnumerator Die()
     {
-        animator.SetTrigger(gameObject.name + "Death");
-        renderer.enabled = false;
+        body.constraints = RigidbodyConstraints2D.FreezeAll;
 
+        if (gameObject.name == "Player")
+        {
+            animator.SetTrigger("PlayerDeath");
+            yield return new WaitForSeconds(0.1f);
+            this.gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            sprite.enabled = false;
+        } else
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 }

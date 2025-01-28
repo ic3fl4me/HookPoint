@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 198175766}
   - component: {fileID: 198175770}
   m_Layer: 8
-  m_Name: Enemy
+  m_Name: Snake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151,7 +151,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1000
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
@@ -298,6 +298,7 @@ MonoBehaviour:
   currentHealth: 0
   body: {fileID: 0}
   animator: {fileID: 0}
+  sprite: {fileID: 0}
   contactDamage: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
