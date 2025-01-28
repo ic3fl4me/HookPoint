@@ -1456,7 +1456,7 @@ MonoBehaviour:
   currentHealth: 0
   body: {fileID: 0}
   animator: {fileID: 1038669365}
-  renderer: {fileID: 0}
+  sprite: {fileID: 0}
   cam: {fileID: 519420031}
 --- !u!95 &1038669365
 Animator:
