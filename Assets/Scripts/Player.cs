@@ -15,8 +15,10 @@ public class Player : Entity
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+        base.Update();
+
         // Lock camera to player
         cam.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
 
@@ -28,9 +30,11 @@ public class Player : Entity
         if (Input.GetKeyDown(KeyCode.R))
         {
             transform.position = spawnPoint;
-            body.constraints = RigidbodyConstraints2D.FreezeRotation;
+            this.currentHealth = this.maxHealth;
+            fellInVoid = false;
             sprite.enabled = true;
             this.gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            body.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
     }
 }

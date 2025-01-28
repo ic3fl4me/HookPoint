@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour, IDamageable
 {
-    [SerializeField] private float maxHealth = 1;
-    [SerializeField] private float currentHealth;
+    [SerializeField] protected float maxHealth = 1;
+    [SerializeField] protected float currentHealth;
     [SerializeField] protected Rigidbody2D body;
     [SerializeField] protected Animator animator;
     [SerializeField] protected SpriteRenderer sprite;
+
+    protected bool fellInVoid = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
@@ -20,9 +22,14 @@ public class Entity : MonoBehaviour, IDamageable
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
-        
+        // Falling into the void instantly kills
+        if (transform.position.y < -12 && !fellInVoid)
+        {
+            this.Damage(999);
+            fellInVoid = true;
+        }
     }
 
     public void Damage(float damageAmount)

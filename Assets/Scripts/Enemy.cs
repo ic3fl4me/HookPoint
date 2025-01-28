@@ -11,9 +11,9 @@ public class Enemy : Entity
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        
+        base.Update();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
