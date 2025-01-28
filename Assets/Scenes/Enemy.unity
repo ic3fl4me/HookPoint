@@ -298,6 +298,7 @@ MonoBehaviour:
   currentHealth: 0
   body: {fileID: 0}
   animator: {fileID: 0}
+  renderer: {fileID: 0}
   contactDamage: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
