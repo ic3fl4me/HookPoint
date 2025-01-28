@@ -7,11 +7,13 @@ public class Entity : MonoBehaviour, IDamageable
     [SerializeField] private float currentHealth;
     [SerializeField] protected Rigidbody2D body;
     [SerializeField] protected Animator animator;
+    [SerializeField] protected SpriteRenderer renderer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        renderer = GetComponent<SpriteRenderer>();
 
         currentHealth = maxHealth;
     }
@@ -34,8 +36,8 @@ public class Entity : MonoBehaviour, IDamageable
 
     private void Die()
     {
-        body.constraints = RigidbodyConstraints2D.FreezeAll;
-        gameObject.SetActive(false);
         animator.SetTrigger(gameObject.name + "Death");
+        renderer.enabled = false;
+
     }
 }

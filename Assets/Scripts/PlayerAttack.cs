@@ -26,7 +26,7 @@ public class PlayerAttack : MonoBehaviour
     {
         HandleGunRotation();
 
-        if (gameObject.activeSelf && Input.GetMouseButtonDown(0) && cooldownTimer > attackCooldown)
+        if (Input.GetMouseButtonDown(0) && cooldownTimer > attackCooldown)
             Attack();
         cooldownTimer += Time.deltaTime;
     }
