@@ -32,6 +32,7 @@ public class Entity : MonoBehaviour, IDamageable
         }
     }
 
+    // Default method for all enities to take damage, and call Die if currentHealth falls to 0
     public void Damage(float damageAmount)
     {
         currentHealth -= damageAmount;
@@ -46,9 +47,11 @@ public class Entity : MonoBehaviour, IDamageable
     {
         body.constraints = RigidbodyConstraints2D.FreezeAll;
 
+        // If object is a player, sprite is not rendered, otherwise objects like enemies are deactivated if they die
         if (gameObject.name == "Player")
         {
             animator.SetTrigger("PlayerDeath");
+            // Give animation time to play
             yield return new WaitForSeconds(0.1f);
             this.gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = false;
             sprite.enabled = false;

@@ -18,6 +18,7 @@ public class Enemy : Entity
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // Only damage players
         if (collision.gameObject.name == "Player")
         {
             IDamageable iDamageable = collision.gameObject.GetComponent<IDamageable>();

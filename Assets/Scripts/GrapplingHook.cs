@@ -19,6 +19,7 @@ public class GrapplingHook : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // Disable non-active grappling hook components
         joint = gameObject.GetComponent<DistanceJoint2D>();
         joint.enabled = false;
         grappleRope.enabled = false;
@@ -27,12 +28,14 @@ public class GrapplingHook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Calculate direction of mouse cursor in relation to player
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         playerPosition = (Vector2)transform.position;
         direction = (mousePosition - playerPosition);
 
         if (Input.GetMouseButtonDown(1))
         {
+            // Send out a raycast to detect a hitbox (only in layer Ground) in direction of mouseCursor, up to the maximum grappling hook length
             RaycastHit2D hit = Physics2D.Raycast(
                 origin: playerPosition,
                 direction: direction.normalized,
@@ -40,11 +43,14 @@ public class GrapplingHook : MonoBehaviour
                 layerMask: grappleLayer
                 );
 
+            // Check if ground was detected
             if (hit.collider != null)
             {
+                // Set grappling hook attachment point to detected hit on ground
                 grapplePoint = hit.point;
                 joint.connectedAnchor = grapplePoint;
                 joint.enabled = true;
+                // Keep distance from point in time where hook connection occured
                 joint.distance = (grapplePoint - playerPosition).magnitude;
                 hookIsAttached = true;
             } else
@@ -60,8 +66,10 @@ public class GrapplingHook : MonoBehaviour
                     grapplePoint = mousePosition;
                 }
                 hookIsAttached = false;
+                // Value used to unrender hook if nothing was hit
                 hookRetractTimer = 0;
             }
+            // Points to render grapple rope
             grappleRope.SetPosition(0, grapplePoint);
             grappleRope.SetPosition(1, playerPosition);
             grappleRope.enabled = true;
@@ -70,6 +78,7 @@ public class GrapplingHook : MonoBehaviour
 
         if (Input.GetMouseButtonUp(1) || (hookRetractTimer > 0.25 && !hookIsAttached))
         {
+            // On release of right click hook is disabled
             joint.enabled = false;
             grappleRope.enabled = false;
             hookIsAttached = false;
@@ -80,6 +89,7 @@ public class GrapplingHook : MonoBehaviour
 
     private void UpdateHookOrigin()
     {
+        // Keep hook origin at player position if player moves
         if (grappleRope.enabled)
         {
             grappleRope.SetPosition(1, playerPosition);

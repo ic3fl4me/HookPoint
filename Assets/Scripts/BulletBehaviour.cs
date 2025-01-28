@@ -29,16 +29,19 @@ public class BulletBehaviour : MonoBehaviour
 
     private void SetStraightVelocity()
     {
+        // Set bullet velocity
         body.linearVelocity = transform.right * bulletSpeed;
     }
 
     private void SetDestroyTime()
     {
+        // Auto destroy bullet after specific amount of time
         Destroy(gameObject, destroyTime);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // Handle bullet destruction and spawning of damaging explosion upon collision
         if ((bulletCollisionObjects.value & (1 << collision.gameObject.layer)) > 0)
         {
             explosionInstance = Instantiate(explosion, body.position, new Quaternion());

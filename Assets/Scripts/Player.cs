@@ -27,12 +27,14 @@ public class Player : Entity
 
     private void HandlePlayerRespawn()
     {
+        // Reset all necessary values, so the player can start again from the spawn without resetting the entire level
         if (Input.GetKeyDown(KeyCode.R))
         {
             transform.position = spawnPoint;
             this.currentHealth = this.maxHealth;
             fellInVoid = false;
             sprite.enabled = true;
+            // Disable bazooka sprite attached to player
             this.gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = true;
             body.constraints = RigidbodyConstraints2D.FreezeRotation;
         }

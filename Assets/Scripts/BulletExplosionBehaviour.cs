@@ -20,11 +20,13 @@ public class BulletExplosionBehaviour : MonoBehaviour
 
     private void SetDestroyTime()
     {
+        // Destroy explosion after set amount of time
         Destroy(gameObject, destroyTime);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // Damage damageable entities in range
         IDamageable iDamageable = collision.gameObject.GetComponent<IDamageable>();
         if (iDamageable != null)
         {
