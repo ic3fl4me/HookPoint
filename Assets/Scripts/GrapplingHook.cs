@@ -15,6 +15,7 @@ public class GrapplingHook : MonoBehaviour
     private Vector2 mousePosition;
     private Vector2 playerPosition;
     private Vector2 direction;
+    private RaycastHit2D hit;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,12 +32,12 @@ public class GrapplingHook : MonoBehaviour
         // Calculate direction of mouse cursor in relation to player
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         playerPosition = (Vector2)transform.position;
-        direction = (mousePosition - playerPosition);
+        direction = mousePosition - playerPosition;
 
         if (Input.GetMouseButtonDown(1))
         {
             // Send out a raycast to detect a hitbox (only in layer Ground) in direction of mouseCursor, up to the maximum grappling hook length
-            RaycastHit2D hit = Physics2D.Raycast(
+            hit = Physics2D.Raycast(
                 origin: playerPosition,
                 direction: direction.normalized,
                 distance: grappleLength,
@@ -46,33 +47,12 @@ public class GrapplingHook : MonoBehaviour
             // Check if ground was detected
             if (hit.collider != null)
             {
-                // Set grappling hook attachment point to detected hit on ground
-                grapplePoint = hit.point;
-                joint.connectedAnchor = grapplePoint;
-                joint.enabled = true;
-                // Keep distance from point in time where hook connection occured
-                joint.distance = (grapplePoint - playerPosition).magnitude;
-                hookIsAttached = true;
+                HandleHookSurfaceHit();
             } else
             {
-                // Stretch out hook if no surface was hit, up to maximum grappleLength
-                if (direction.magnitude > grappleLength)
-                {
-                    // Calculate point in direction of mouseCursor with max grappleLength
-                    grapplePoint = playerPosition + direction.normalized * grappleLength;
-                } else
-                {
-                    // Use mouseCursor position if it is within max allowed grappleLength
-                    grapplePoint = mousePosition;
-                }
-                hookIsAttached = false;
-                // Value used to unrender hook if nothing was hit
-                hookRetractTimer = 0;
+                HandleHookMiss();
             }
-            // Points to render grapple rope
-            grappleRope.SetPosition(0, grapplePoint);
-            grappleRope.SetPosition(1, playerPosition);
-            grappleRope.enabled = true;
+            DrawHook();
         }
         hookRetractTimer += Time.deltaTime;
 
@@ -85,6 +65,43 @@ public class GrapplingHook : MonoBehaviour
         }
 
         UpdateHookOrigin();
+    }
+
+    private void HandleHookSurfaceHit()
+    {
+        // Set grappling hook attachment point to detected hit on ground
+        grapplePoint = hit.point;
+        joint.connectedAnchor = grapplePoint;
+        joint.enabled = true;
+        // Keep distance from point in time where hook connection occured
+        joint.distance = (grapplePoint - playerPosition).magnitude;
+        hookIsAttached = true;
+    }
+
+    private void HandleHookMiss()
+    {
+        // Stretch out hook if no surface was hit, up to maximum grappleLength
+        if (direction.magnitude > grappleLength)
+        {
+            // Calculate point in direction of mouseCursor with max grappleLength
+            grapplePoint = playerPosition + direction.normalized * grappleLength;
+        }
+        else
+        {
+            // Use mouseCursor position if it is within max allowed grappleLength
+            grapplePoint = mousePosition;
+        }
+        hookIsAttached = false;
+        // Value used to unrender hook after a certain time if nothing was hit
+        hookRetractTimer = 0;
+    }
+
+    private void DrawHook()
+    {
+        // Points to render grapple rope
+        grappleRope.SetPosition(0, grapplePoint);
+        grappleRope.SetPosition(1, playerPosition);
+        grappleRope.enabled = true;
     }
 
     private void UpdateHookOrigin()
