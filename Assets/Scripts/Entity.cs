@@ -9,16 +9,22 @@ public class Entity : MonoBehaviour, IDamageable
     [SerializeField] protected Rigidbody2D body;
     [SerializeField] protected Animator animator;
     [SerializeField] protected SpriteRenderer sprite;
+    [SerializeField] protected PlayerAttack playerAttack;
 
     protected bool fellInVoid = false;
+    protected bool alive = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
     {
         body = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+        
+        if (gameObject.name == "Player")
+            playerAttack = GetComponent<PlayerAttack>();
 
         currentHealth = maxHealth;
+        alive = true;
     }
 
     // Update is called once per frame
@@ -37,8 +43,9 @@ public class Entity : MonoBehaviour, IDamageable
     {
         currentHealth -= damageAmount;
 
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && alive)
         {
+            alive = false;
             StartCoroutine("Die");
         }
     }
@@ -50,6 +57,7 @@ public class Entity : MonoBehaviour, IDamageable
         // If object is a player, sprite is not rendered, otherwise objects like enemies are deactivated if they die
         if (gameObject.name == "Player")
         {
+            playerAttack.DisableGun();
             animator.SetTrigger("PlayerDeath");
             // Give animation time to play
             yield return new WaitForSeconds(0.1f);

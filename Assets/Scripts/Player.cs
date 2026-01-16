@@ -37,6 +37,7 @@ public class Player : Entity
             // Disable bazooka sprite attached to player
             this.gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = true;
             body.constraints = RigidbodyConstraints2D.FreezeRotation;
+            playerAttack.EnableGun();
         }
     }
 }
