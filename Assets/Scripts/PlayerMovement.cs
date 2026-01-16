@@ -8,33 +8,55 @@ public class PlayerMovement : MonoBehaviour
 
     private SpriteRenderer sprite;
     private Rigidbody2D body;
+
     private bool doubleJumpAvailable = true;
     private bool isGrounded = false;
+
     private Vector2 mousePosition;
     private Vector2 normalizedDirection;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [Header("Ground Check")]
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float groundRadius = 0.12f;
+    [SerializeField] private LayerMask groundLayer;
+
+    [Header("Footsteps")]
+    [SerializeField] private AudioSource footstepsSource;   // AudioSource mit deinem Geh-Clip (Loop an)
+    [SerializeField] private float minRunSpeed = 0.1f;
+
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+
+        if (footstepsSource == null)
+            footstepsSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        UpdateGrounded();
+
         HandlePlayerRotation();
-
         HandlePlayerMovement();
-
         HandlePlayerJump();
+
+        UpdateFootsteps();
+    }
+
+    private void UpdateGrounded()
+    {
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundLayer);
+
+        // sobald du wirklich am Boden bist, Double Jump resetten
+        if (isGrounded)
+            doubleJumpAvailable = true;
     }
 
     private void HandlePlayerMovement()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
 
-        // Enable horizontal movement with A and D
         if (horizontalInput != 0)
             body.linearVelocity = new Vector2(horizontalInput * movementSpeed, body.linearVelocity.y);
         else
@@ -43,48 +65,45 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandlePlayerJump()
     {
-        // Enable double jump and calculate velocity from jump
         if (Input.GetKeyDown(KeyCode.Space) && (isGrounded || doubleJumpAvailable))
         {
             body.linearVelocity = new Vector2(body.linearVelocity.x, movementSpeed * 0.75f);
+
             if (!isGrounded)
                 doubleJumpAvailable = false;
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void UpdateFootsteps()
     {
-        // Reset jumps on ground contact
-        if (other.gameObject.CompareTag("Ground"))
-        {
-            doubleJumpAvailable = true;
-            isGrounded = true;
-        }
-    }
+        if (footstepsSource == null) return;
 
-    private void OnCollisionExit2D(Collision2D other)
-    {
-        // Detect if player is not touching ground anymore
-        if (other.gameObject.CompareTag("Ground"))
+        float speedX = Mathf.Abs(body.linearVelocity.x);
+        bool shouldPlay = isGrounded && speedX > minRunSpeed;
+
+        if (shouldPlay)
         {
-            isGrounded = false;
+            if (!footstepsSource.isPlaying) footstepsSource.Play();
+        }
+        else
+        {
+            if (footstepsSource.isPlaying) footstepsSource.Stop();
         }
     }
 
     private void HandlePlayerRotation()
     {
-        // Calculate position of mouse cursor in relation to player
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         normalizedDirection = (mousePosition - (Vector2)body.transform.position).normalized;
 
-        // Flip sprite to match mouse cursor placement
-        if (normalizedDirection.x > 0)
-        {
-            sprite.flipX = false;
-        }
-        else if (normalizedDirection.x < 0) 
-        {
-            sprite.flipX = true;
-        }
+        if (normalizedDirection.x > 0) sprite.flipX = false;
+        else if (normalizedDirection.x < 0) sprite.flipX = true;
+    }
+
+    // Optional: GroundCheck-Kreis im Scene-View sichtbar machen
+    private void OnDrawGizmosSelected()
+    {
+        if (groundCheck == null) return;
+        Gizmos.DrawWireSphere(groundCheck.position, groundRadius);
     }
 }
