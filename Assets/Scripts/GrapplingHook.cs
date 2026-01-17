@@ -8,6 +8,10 @@ public class GrapplingHook : MonoBehaviour
     [SerializeField] private LayerMask grappleLayer;
     [SerializeField] private LineRenderer grappleRope;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource sfxSource;   // SFX AudioSource
+    [SerializeField] private AudioClip hookFireClip;  // Hook-Abfeuer-Sound
+
     private Vector2 grapplePoint;
     private DistanceJoint2D joint;
     private float hookRetractTimer;
@@ -24,6 +28,9 @@ public class GrapplingHook : MonoBehaviour
         joint = gameObject.GetComponent<DistanceJoint2D>();
         joint.enabled = false;
         grappleRope.enabled = false;
+
+        // optionaler Fallback
+        if (sfxSource == null) sfxSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -36,6 +43,10 @@ public class GrapplingHook : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
         {
+            // Hook-Fire Sound (bei jedem Abfeuern)
+            if (sfxSource != null && hookFireClip != null)
+                sfxSource.PlayOneShot(hookFireClip, 1f);
+
             // Send out a raycast to detect a hitbox (only in layer Ground) in direction of mouseCursor, up to the maximum grappling hook length
             hit = Physics2D.Raycast(
                 origin: playerPosition,

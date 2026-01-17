@@ -1,29 +1,51 @@
+using System.Collections;
 using UnityEngine;
 
 public class FinishLevelLogic : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    } 
+    [Header("Audio")]
+    [SerializeField] private AudioSource sfxSource;         // AudioSource auf diesem Finish-Objekt
+    [SerializeField] private AudioClip levelFinishClip;     // Finish-Sound
+    [SerializeField, Range(0f, 1f)] private float volume = 1f;
 
-    // Update is called once per frame
-    void Update()
+    [Header("Finish Timing")]
+    [SerializeField] private float minDelay = 0.2f;         // falls Clip sehr kurz/leer
+
+    private bool triggered = false;
+
+    private void Awake()
     {
-        // Call ScoreManagers function to finish if the OnTriggerEnter2D function below was executed
-        if (ScoreManager.instance.isLevelFinished)
+        if (sfxSource == null)
+            sfxSource = GetComponent<AudioSource>();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (triggered) return;
+
+        if (collision.gameObject.name == "Player")
         {
-            ScoreManager.instance.FinishLevel();
+            triggered = true;
+
+            // Flag setzen (wie vorher)
+            ScoreManager.instance.isLevelFinished = true;
+
+            // Sound abspielen
+            float delay = minDelay;
+            if (sfxSource != null && levelFinishClip != null)
+            {
+                sfxSource.PlayOneShot(levelFinishClip, volume);
+                delay = Mathf.Max(delay, levelFinishClip.length);
+            }
+
+            // Finish erst nach Sound
+            StartCoroutine(FinishAfterDelay(delay));
         }
     }
 
-    // Upon player contact set isLevelFinished
-    private void OnTriggerEnter2D(Collider2D collision)
+    private IEnumerator FinishAfterDelay(float delay)
     {
-        if (collision.gameObject.name == "Player")
-        {
-            ScoreManager.instance.isLevelFinished = true;
-        }
+        yield return new WaitForSecondsRealtime(delay);
+        ScoreManager.instance.FinishLevel();
     }
 }

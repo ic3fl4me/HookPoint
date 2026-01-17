@@ -23,6 +23,7 @@ public class Player : Entity
         cam.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
 
         HandlePlayerRespawn();
+   
     }
 
     private void HandlePlayerRespawn()
@@ -38,6 +39,8 @@ public class Player : Entity
             this.gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = true;
             body.constraints = RigidbodyConstraints2D.FreezeRotation;
             playerAttack.EnableGun();
+
+            GetComponent<Entity>().ResetDeathSound();
         }
     }
 }

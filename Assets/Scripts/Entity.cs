@@ -11,6 +11,11 @@ public class Entity : MonoBehaviour, IDamageable
     [SerializeField] protected SpriteRenderer sprite;
     [SerializeField] protected PlayerAttack playerAttack;
 
+    [Header("Audio (Player only)")]
+    [SerializeField] private AudioSource playerSfxSource;   // zuweisen beim Player
+    [SerializeField] private AudioClip playerDeathClip;     // zuweisen beim Player
+    private bool deathSoundPlayed = false;
+
     protected bool fellInVoid = false;
     protected bool alive = false;
 
@@ -46,6 +51,15 @@ public class Entity : MonoBehaviour, IDamageable
         if (currentHealth <= 0 && alive)
         {
             alive = false;
+
+            // Death sound (nur beim Player)
+            if (gameObject.name == "Player" && !deathSoundPlayed)
+            {
+                deathSoundPlayed = true;
+                if (playerSfxSource != null && playerDeathClip != null)
+                    playerSfxSource.PlayOneShot(playerDeathClip, 1f);
+            }
+
             StartCoroutine("Die");
         }
     }
@@ -68,4 +82,9 @@ public class Entity : MonoBehaviour, IDamageable
             this.gameObject.SetActive(false);
         }
     }
+    public void ResetDeathSound()
+    {
+        deathSoundPlayed = false;
+    }
 }
+

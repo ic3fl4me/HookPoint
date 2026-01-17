@@ -20,17 +20,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float groundRadius = 0.12f;
     [SerializeField] private LayerMask groundLayer;
 
-    [Header("Footsteps")]
-    [SerializeField] private AudioSource footstepsSource;   // AudioSource mit deinem Geh-Clip (Loop an)
+    [Header("Footsteps (Loop)")]
+    [SerializeField] private AudioSource footstepsSource;   // AudioSource mit Geh-Loop (Loop an)
     [SerializeField] private float minRunSpeed = 0.1f;
+
+    [Header("Jump Audio (OneShot)")]
+    [SerializeField] private AudioSource sfxSource;         // SFX AudioSource (Loop aus)
+    [SerializeField] private AudioClip jumpClip;            // Jump-Sound
 
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
-
-        if (footstepsSource == null)
-            footstepsSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -46,6 +47,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateGrounded()
     {
+        if (groundCheck == null) return;
+
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundLayer);
 
         // sobald du wirklich am Boden bist, Double Jump resetten
@@ -67,6 +70,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && (isGrounded || doubleJumpAvailable))
         {
+            // Jump-Sound jedes Mal beim erfolgreichen Sprung (auch Double Jump)
+            if (sfxSource != null && jumpClip != null)
+                sfxSource.PlayOneShot(jumpClip, 1f);
+
             body.linearVelocity = new Vector2(body.linearVelocity.x, movementSpeed * 0.75f);
 
             if (!isGrounded)
