@@ -16,17 +16,18 @@ public class PlayerAttack : MonoBehaviour
 
     [Header("Audio (SFX)")]
     [SerializeField] private AudioSource sfxSource;  // eigener AudioSource für Raketen/SFX
-    [SerializeField] private AudioClip rocketClip;   //  Raketen/Schuss-Clip
-    [SerializeField] private AudioClip reloadClip;      // Nachladen
+    [SerializeField] private AudioClip rocketClip;   //  Raketen/Schuss Sound
+    [SerializeField] private AudioClip reloadClip;   // Nachladen Sound
     [SerializeField, Range(0f, 1f)] private float rocketVolume = 1f;
     [SerializeField, Range(0f, 1f)] private float reloadVolume = 1f;
 
+    [SerializeField] private AmmoUI ammoUI;
     private Vector2 mousePosition;
     private Vector2 normalizedDirection;
     private GameObject bulletInstance;
     private float cooldownTimer = Mathf.Infinity;
     private bool gunActive = true;
-    private bool isReloading = false;
+    public bool gunRotationActive = true;
 
     void Start()
     {
@@ -37,15 +38,16 @@ public class PlayerAttack : MonoBehaviour
     {
         HandleGunRotation();
 
-        if (ammo <= 0 && !isReloading)
+        if (ammo <= 0 && gunActive)
+        {
+            DisableGun();
             StartCoroutine(Reload());
-
-        // Linksklick schießen
+        }
+        
+        // Left click to shoot, with predetermined cooldown
         if (Input.GetMouseButtonDown(0) &&
             cooldownTimer > attackCooldown &&
-            gunActive &&
-            ammo > 0 &&
-            !isReloading)
+            gunActive)
         {
             Attack();
         }
@@ -55,6 +57,8 @@ public class PlayerAttack : MonoBehaviour
 
     private void HandleGunRotation()
     {
+        if (!gunRotationActive) return;
+
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         normalizedDirection = (mousePosition - (Vector2)gun.transform.position).normalized;
 
@@ -64,27 +68,28 @@ public class PlayerAttack : MonoBehaviour
 
     private void Attack()
     {
+        --ammo;
+        ammoUI.UpdateUI(ammo);
+        cooldownTimer = 0;
+
+        // New bullet is created
         bulletInstance = Instantiate(bullet, bulletSpawnPoint.position, gun.transform.rotation);
 
-        // Raketen/Schuss-Sound
-        if (sfxSource != null && rocketClip != null)
-            sfxSource.PlayOneShot(rocketClip, 1f);
-
-        cooldownTimer = 0;
-        ammo--;
-    }
+    // Raketen/Schuss-Sound
+    if (sfxSource != null && rocketClip != null)
+        sfxSource.PlayOneShot(rocketClip, rocketVolume);
+}
 
     private IEnumerator Reload()
     {
-        isReloading = true;
-
         // Reload-Sound (einmal beim Start)
         if (sfxSource != null && reloadClip != null)
             sfxSource.PlayOneShot(reloadClip, reloadVolume);
 
         yield return new WaitForSeconds(reloadTime);
         ammo = clipSize;
-        isReloading = false;
+        ammoUI.UpdateUI(ammo);
+        EnableGun();
     }
 
     public void EnableGun() => gunActive = true;

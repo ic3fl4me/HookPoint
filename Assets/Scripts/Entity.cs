@@ -82,6 +82,7 @@ public class Entity : MonoBehaviour, IDamageable
             this.gameObject.SetActive(false);
         }
     }
+
     public void ResetDeathSound()
     {
         deathSoundPlayed = false;

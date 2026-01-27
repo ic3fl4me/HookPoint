@@ -21,6 +21,8 @@ public class GrapplingHook : MonoBehaviour
     private Vector2 direction;
     private RaycastHit2D hit;
 
+    public bool playerFrozen = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -36,6 +38,8 @@ public class GrapplingHook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerFrozen) return;
+
         // Calculate direction of mouse cursor in relation to player
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         playerPosition = (Vector2)transform.position;

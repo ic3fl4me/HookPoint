@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 mousePosition;
     private Vector2 normalizedDirection;
 
+    public bool playerFrozen = false;
+
     [Header("Ground Check")]
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundRadius = 0.12f;
@@ -100,6 +102,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandlePlayerRotation()
     {
+        if (playerFrozen) return;
+
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         normalizedDirection = (mousePosition - (Vector2)body.transform.position).normalized;
 

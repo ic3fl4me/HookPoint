@@ -1,11 +1,15 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EscapeMenu : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     public GameObject panel;
+    [SerializeField] private Player player;
+
     void Start()
     {
+        player = FindAnyObjectByType(typeof(Player)).GetComponent<Player>();
         if (panel != null)
             panel.SetActive(false);
     }
@@ -15,20 +19,16 @@ public class EscapeMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log("ESC gedrückt"); // TEST
             TogglePanel();
         }
-
-        if (Input.anyKeyDown)
-        {
-            Debug.Log("Taste gedrückt");
-        }
     }
-    void TogglePanel()
+
+    public void TogglePanel()
     {
         if (panel == null) return;
 
         panel.SetActive(!panel.activeSelf);
+        player.TogglePlayerActive(panel.activeSelf);
     }
 
 }

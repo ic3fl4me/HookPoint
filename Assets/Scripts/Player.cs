@@ -5,6 +5,8 @@ using UnityEngine;
 public class Player : Entity
 {
     [SerializeField] private Camera cam;
+    [SerializeField] private PlayerMovement playerMovement;
+    [SerializeField] private GrapplingHook grapplingHook;
     private Vector2 spawnPoint;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -31,6 +33,7 @@ public class Player : Entity
         // Reset all necessary values, so the player can start again from the spawn without resetting the entire level
         if (Input.GetKeyDown(KeyCode.R))
         {
+            alive = true;
             transform.position = spawnPoint;
             this.currentHealth = this.maxHealth;
             fellInVoid = false;
@@ -42,5 +45,34 @@ public class Player : Entity
 
             GetComponent<Entity>().ResetDeathSound();
         }
+    }
+
+    public void TogglePlayerActive(bool menuOpen)
+    {
+        if (!menuOpen)
+        {
+            UnfreezePlayer();
+        } else
+        {
+            FreezePlayer();
+        }
+    }
+
+    private void FreezePlayer()
+    {
+        body.constraints = RigidbodyConstraints2D.FreezeAll;
+        playerAttack.DisableGun();
+        playerAttack.gunRotationActive = false;
+        playerMovement.playerFrozen = true;
+        grapplingHook.playerFrozen = true;
+    }
+
+    private void UnfreezePlayer()
+    {
+        body.constraints = RigidbodyConstraints2D.FreezeRotation;
+        playerAttack.EnableGun();
+        playerAttack.gunRotationActive = true;
+        playerMovement.playerFrozen = false;
+        grapplingHook.playerFrozen = false;
     }
 }
